@@ -18,86 +18,104 @@ export function TestimonialsSection() {
   };
 
   return (
-    <section id='testimonials' className='py-24 bg-slate-50'>
-      <div className='container mx-auto px-4 md:px-6'>
-        <div className="flex flex-col lg:flex-row gap-16 items-start">
-          
-          <div className='lg:w-1/3 space-y-6'>
-            <div className="inline-flex items-center rounded-full border border-slate-200 bg-white px-3 py-1 text-sm text-slate-900 shadow-sm">
-              Client Voices
+    <section id='testimonials' className='relative w-full py-24 md:py-32'>
+      <div className='container mx-auto px-6'>
+        <div className='grid grid-cols-1 gap-10 lg:grid-cols-12 lg:gap-12'>
+          <div className='lg:col-span-4 space-y-6'>
+            <div className='inline-flex items-center gap-3 rounded-full border border-border/60 bg-background/25 px-4 py-2 backdrop-blur-xl'>
+              <span className='h-2 w-2 rounded-full bg-accent' />
+              <span className='text-xs font-semibold tracking-[0.18em] uppercase text-muted-foreground'>
+                Testimonials
+              </span>
             </div>
-            
-            <h2 className='text-3xl md:text-4xl font-bold tracking-tight text-slate-900'>
-              Trusted by Industry Leaders
+
+            <h2 className='text-3xl md:text-4xl font-semibold tracking-tight text-foreground'>
+              Partners who care about the details.
             </h2>
 
-            <p className="text-lg text-slate-600 leading-relaxed">
+            <p className='text-sm md:text-base leading-relaxed text-muted-foreground'>
               From scenic flights to event-day flyovers, hear what partners say about working with LagoPiedra.
             </p>
 
-            <div className="flex gap-4 pt-4">
-               <Button 
-                 variant="outline"
-                 size="icon"
-                 onClick={prevTestimonial}
-                 className="rounded-full w-12 h-12 border-slate-200 hover:bg-slate-100"
-               >
-                 <ArrowLeft className="w-5 h-5 text-slate-900" />
-               </Button>
-               <Button 
-                 variant="default"
-                 size="icon"
-                 onClick={nextTestimonial}
-                 className="rounded-full w-12 h-12"
-               >
-                 <ArrowRight className="w-5 h-5" />
-               </Button>
+            <div className='flex gap-3 pt-2'>
+              <Button
+                variant='outline'
+                size='icon'
+                onClick={prevTestimonial}
+                className='h-12 w-12 rounded-2xl border-border/70 bg-background/20 hover:bg-secondary/70'
+              >
+                <ArrowLeft className='h-5 w-5' />
+              </Button>
+              <Button
+                size='icon'
+                onClick={nextTestimonial}
+                className='h-12 w-12 rounded-2xl bg-primary text-primary-foreground hover:bg-primary/90 shadow-[0_10px_35px_rgba(56,189,248,0.25)]'
+              >
+                <ArrowRight className='h-5 w-5' />
+              </Button>
             </div>
           </div>
 
-          <div className="lg:w-2/3 w-full">
-            <div className="relative min-h-[300px]">
-              <AnimatePresence mode="wait">
+          <div className='lg:col-span-8'>
+            <div className='relative min-h-[360px]'>
+              <AnimatePresence mode='wait'>
                 <motion.div
                   key={currentIndex}
-                  initial={{ opacity: 0, x: 20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  exit={{ opacity: 0, x: -20 }}
-                  transition={{ duration: 0.4, ease: "easeOut" }}
-                  className="absolute inset-0"
+                  initial={{ opacity: 0, y: 12 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -12 }}
+                  transition={{ duration: 0.35, ease: 'easeOut' }}
+                  className='absolute inset-0'
                 >
-                  <div className='relative w-full h-full p-8 md:p-12 bg-white rounded-2xl shadow-sm border border-slate-100 flex flex-col justify-between'>
-                    <div className="absolute top-8 right-8 text-slate-100">
-                       <Quote className="w-16 h-16 opacity-50" />
+                  <div className='relative h-full overflow-hidden rounded-3xl border border-border/60 bg-background/25 p-8 md:p-12 backdrop-blur-xl shadow-[0_40px_120px_rgba(0,0,0,0.55)]'>
+                    <div className='absolute -top-10 -right-10 h-48 w-48 rounded-full bg-primary/20 blur-3xl' />
+                    <div className='absolute top-8 right-8 text-muted opacity-50'>
+                      <Quote className='h-14 w-14' />
                     </div>
 
-                    <div>
-                      <div className='flex gap-1 mb-6'>
+                    <div className='relative'>
+                      <div className='flex gap-1'>
                         {[...Array(5)].map((_, i) => (
-                           <Star key={i} className={`w-5 h-5 ${i < testimonials[currentIndex].rating ? 'fill-yellow-400 text-yellow-400' : 'text-slate-200'}`} />
+                          <Star
+                            key={i}
+                            className={[
+                              'h-5 w-5',
+                              i < testimonials[currentIndex].rating
+                                ? 'fill-accent text-accent'
+                                : 'text-muted-foreground/30',
+                            ].join(' ')}
+                          />
                         ))}
                       </div>
-                      
-                      <p className="text-xl md:text-2xl font-medium text-slate-900 leading-relaxed mb-8 relative z-10">
+
+                      <p className='mt-8 text-xl md:text-2xl font-semibold tracking-tight text-foreground leading-relaxed max-w-3xl'>
                         &quot;{testimonials[currentIndex].content}&quot;
                       </p>
                     </div>
 
-                    <div className="flex items-center gap-4 border-t border-slate-100 pt-6">
-                       <div className="w-12 h-12 bg-slate-100 rounded-full flex items-center justify-center font-bold text-lg text-slate-600">
+                    <div className='mt-10 flex items-center justify-between gap-6 border-t border-border/60 pt-8'>
+                      <div className='flex items-center gap-4'>
+                        <div className='h-12 w-12 rounded-2xl border border-border/60 bg-secondary/25 flex items-center justify-center text-base font-semibold text-foreground'>
                           {testimonials[currentIndex].name[0]}
-                       </div>
-                       <div>
-                          <div className="font-semibold text-slate-900">{testimonials[currentIndex].name}</div>
-                          <div className="text-sm text-slate-500">{testimonials[currentIndex].role}, {testimonials[currentIndex].company}</div>
-                       </div>
+                        </div>
+                        <div>
+                          <div className='text-sm font-semibold text-foreground'>
+                            {testimonials[currentIndex].name}
+                          </div>
+                          <div className='text-xs text-muted-foreground'>
+                            {testimonials[currentIndex].role}, {testimonials[currentIndex].company}
+                          </div>
+                        </div>
+                      </div>
+                      <div className='hidden sm:block rounded-full border border-border/60 bg-secondary/25 px-4 py-2 text-xs font-semibold tracking-[0.18em] uppercase text-muted-foreground'>
+                        Verified Partner
+                      </div>
                     </div>
                   </div>
                 </motion.div>
               </AnimatePresence>
             </div>
           </div>
-
         </div>
       </div>
     </section>

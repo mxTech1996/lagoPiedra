@@ -19,7 +19,7 @@ export function Logo({ className }: { className?: string }) {
           className="h-10 w-10 object-contain"
         />
       ) : (
-        <div className="h-10 w-10 bg-slate-900 rounded-lg" />
+        <div className="h-10 w-10 rounded-2xl border border-border/60 bg-primary/20" />
       )}
     </div>
   );

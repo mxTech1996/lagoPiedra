@@ -3,88 +3,112 @@
 import { Logo } from '@/components/logo';
 import Link from 'next/link';
 import { dataSite } from '@/lib/data';
-import { ArrowUpRight } from 'lucide-react';
+import { ArrowRight, ArrowUpRight } from 'lucide-react';
+import { Button } from '@/components/ui/button';
 
 export function Footer() {
   return (
-    <footer className='w-full bg-slate-900 text-white border-t border-slate-800'>
+    <footer className='w-full border-t border-border/70 bg-background/40 backdrop-blur'>
       <div className='container mx-auto px-6 py-16'>
-        <div className='grid grid-cols-1 md:grid-cols-4 gap-12 mb-16'>
-          
-          {/* Brand Column */}
-          <div className='col-span-1 md:col-span-1 space-y-6'>
-            <div className="flex items-center gap-2">
-              <div className="bg-white p-1 rounded-md">
-                <Logo className="w-8 h-8" />
+        <div className='mb-14 overflow-hidden rounded-3xl border border-border/70 bg-secondary/20 p-8 md:p-10 shadow-[0_40px_120px_rgba(0,0,0,0.55)]'>
+          <div className='grid gap-8 md:grid-cols-12 md:items-center'>
+            <div className='md:col-span-7'>
+              <div className='flex items-center gap-3'>
+                <div className='relative'>
+                  <div className='absolute inset-0 rounded-2xl bg-primary/25 blur-xl' />
+                  <Logo className='relative w-8 h-8' />
+                </div>
+                <span className='text-sm font-semibold tracking-[0.18em] uppercase text-foreground'>
+                  {dataSite.shortName}
+                </span>
               </div>
-              <span className="text-xl font-bold tracking-tight text-white">{dataSite.shortName}</span>
+              <h3 className='mt-5 text-2xl md:text-3xl font-semibold tracking-tight text-foreground'>
+                Aviation services designed for tourism destinations.
+              </h3>
+              <p className='mt-3 text-sm md:text-base text-muted-foreground leading-relaxed max-w-2xl'>
+                Scenic routes, aerial shows, and production support—planned with safety, timing, and guest experience at the center.
+              </p>
             </div>
-            
-            <p className="text-sm text-slate-400 leading-relaxed">
-              Aviation services and aerial experiences for tourism destinations. Delivering safe, coordinated flights and show-ready operations since 2024.
-            </p>
-          </div>
-
-          {/* Navigation */}
-          <div className='col-span-1'>
-            <h3 className='text-sm font-semibold uppercase tracking-wider text-slate-500 mb-6'>Navigation</h3>
-            <ul className='space-y-4'>
-              {dataSite.navLinks.map((link) => (
-                <li key={link.href}>
-                  <Link 
-                    href={link.href} 
-                    className='text-sm font-medium text-slate-300 hover:text-white transition-colors flex items-center gap-2 group'
-                  >
-                    {link.label}
-                    <ArrowUpRight className="w-3 h-3 opacity-0 -translate-y-1 translate-x-1 group-hover:opacity-100 group-hover:translate-y-0 group-hover:translate-x-0 transition-all" />
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Contact */}
-          <div className='col-span-1'>
-            <h3 className='text-sm font-semibold uppercase tracking-wider text-slate-500 mb-6'>Contact</h3>
-            <ul className='space-y-4'>
-              <li>
-                <p className="text-xs text-slate-500 mb-1">Email</p>
-                <a href={`mailto:${dataSite.email}`} className='text-sm font-medium text-white hover:text-accent transition-colors'>
-                  {dataSite.email}
-                </a>
-              </li>
-              <li>
-                <p className="text-xs text-slate-500 mb-1">Phone</p>
-                <p className='text-sm font-medium text-white'>
-                  {dataSite.telephone}
-                </p>
-              </li>
-              <li>
-                <p className="text-xs text-slate-500 mb-1">Address</p>
-                <p className='text-sm font-medium text-white text-balance'>
-                  {dataSite.address}
-                </p>
-              </li>
-            </ul>
-          </div>
-
-          {/* Legal/Links */}
-          <div className='col-span-1'>
-            <h3 className='text-sm font-semibold uppercase tracking-wider text-slate-500 mb-6'>Legal</h3>
-            <ul className='space-y-4'>
-              <li><Link href='/pdf/TYC.pdf' target='_blank' className='text-sm font-medium text-slate-300 hover:text-white transition-colors'>Terms & Conditions</Link></li>
-              <li><Link href='/pdf/AP.pdf' target='_blank' className='text-sm font-medium text-slate-300 hover:text-white transition-colors'>Privacy Policy</Link></li>
-            </ul>
+            <div className='md:col-span-5 md:justify-self-end'>
+              <Link href='/contact'>
+                <Button className='h-12 rounded-2xl bg-primary text-primary-foreground hover:bg-primary/90 px-6 font-semibold shadow-[0_10px_35px_rgba(56,189,248,0.25)]'>
+                  Request a Proposal <ArrowRight className='ml-2 h-4 w-4' />
+                </Button>
+              </Link>
+            </div>
           </div>
         </div>
 
-        {/* Bottom Bar */}
-        <div className='pt-8 border-t border-slate-800 flex flex-col md:flex-row justify-between items-center gap-4'>
-          <p className='text-xs text-slate-500'>
+        <div className='grid grid-cols-1 gap-10 md:grid-cols-12'>
+          <div className='md:col-span-5 space-y-4'>
+            <p className='text-sm text-muted-foreground leading-relaxed'>
+              {dataSite.description}
+            </p>
+            <div className='flex flex-wrap gap-2'>
+              {dataSite.navLinks.map((link) => (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className='inline-flex items-center gap-2 rounded-full border border-border/70 bg-secondary/20 px-4 py-2 text-sm font-medium text-foreground hover:bg-secondary/60 transition-all'
+                >
+                  {link.label}
+                  <ArrowUpRight className='h-4 w-4 text-muted-foreground' />
+                </Link>
+              ))}
+            </div>
+          </div>
+
+          <div className='md:col-span-4'>
+            <h3 className='text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground mb-4'>
+              Contact
+            </h3>
+            <div className='grid gap-4'>
+              <a
+                href={`mailto:${dataSite.email}`}
+                className='rounded-2xl border border-border/70 bg-secondary/20 p-4 text-sm font-medium text-foreground hover:bg-secondary/60 transition-all'
+              >
+                {dataSite.email}
+              </a>
+              <div className='rounded-2xl border border-border/70 bg-secondary/20 p-4 text-sm font-medium text-foreground'>
+                {dataSite.telephone}
+              </div>
+              <div className='rounded-2xl border border-border/70 bg-secondary/20 p-4 text-sm font-medium text-foreground'>
+                {dataSite.address}
+              </div>
+            </div>
+          </div>
+
+          <div className='md:col-span-3'>
+            <h3 className='text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground mb-4'>
+              Legal
+            </h3>
+            <div className='grid gap-2'>
+              <Link
+                href='/pdf/TYC.pdf'
+                target='_blank'
+                className='rounded-2xl border border-border/70 bg-secondary/20 p-4 text-sm font-medium text-foreground hover:bg-secondary/60 transition-all'
+              >
+                Terms &amp; Conditions
+              </Link>
+              <Link
+                href='/pdf/AP.pdf'
+                target='_blank'
+                className='rounded-2xl border border-border/70 bg-secondary/20 p-4 text-sm font-medium text-foreground hover:bg-secondary/60 transition-all'
+              >
+                Privacy Policy
+              </Link>
+            </div>
+          </div>
+        </div>
+
+        <div className='mt-14 flex flex-col gap-3 border-t border-border/60 pt-8 md:flex-row md:items-center md:justify-between'>
+          <p className='text-xs text-muted-foreground'>
             © {new Date().getFullYear()} {dataSite.name}. All rights reserved.
           </p>
+          <p className='text-xs text-muted-foreground'>
+            Built for destinations, events, and unforgettable views.
+          </p>
         </div>
-
       </div>
     </footer>
   );

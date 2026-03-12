@@ -10,87 +10,123 @@ import { ArrowRight } from 'lucide-react';
 
 export function AboutUsSection() {
   return (
-    <section id='about' className='py-32 bg-background relative border-t border-border'>
+    <section id='about' className='relative w-full py-24 md:py-32'>
       <div className='container mx-auto px-6'>
-        
-        {/* Section Header - Editorial Style */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-20 gap-8">
-           <div className="max-w-xl">
-              <span className="font-mono text-xs uppercase tracking-widest text-muted-foreground mb-4 block">
-                001 / About LagoPiedra
-              </span>
-              <h2 className='text-4xl md:text-5xl font-semibold tracking-tight text-foreground'>
-                Elevating destinations through <br/>
-                <span className="text-muted-foreground italic font-normal">calculated precision.</span>
-              </h2>
-           </div>
-           <div className="hidden md:block h-px flex-1 bg-border mx-12 mb-4" />
-           <Link href="/services">
-              <Button variant="ghost" className="group text-base">
-                Explore Services <ArrowRight className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-1" />
-              </Button>
-           </Link>
-        </div>
-
-        {/* Content Grid */}
-        <div className='grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-24'>
-          
-          {/* Left Column - Image Composition */}
-          <div className='lg:col-span-5 relative'>
-            <motion.div 
-              initial={{ opacity: 0, scale: 0.95 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.8, ease: "circOut" }}
-              viewport={{ once: true }}
-              className='relative aspect-[3/4] w-full rounded-sm overflow-hidden bg-secondary'
-            >
-              <Image
-                src={dataSite.imagesHero[1]}
-                alt="About LagoPiedra aviation experiences"
-                fill
-                className='object-cover grayscale hover:grayscale-0 transition-all duration-700'
-              />
-              {/* Technical Overlay */}
-              <div className="absolute top-4 right-4 bg-white/90 backdrop-blur px-3 py-1 text-[10px] font-mono border border-black/5">
-                IMG_REF: A-04
+        <div className='grid grid-cols-1 gap-10 lg:grid-cols-12 lg:gap-12'>
+          <motion.div
+            initial={{ opacity: 0, y: 18 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.55, ease: 'easeOut' }}
+            viewport={{ once: true }}
+            className='lg:col-span-6'
+          >
+            <div className='relative overflow-hidden rounded-3xl border border-border/60 bg-background/25 backdrop-blur-xl'>
+              <div className='absolute inset-0 opacity-90'>
+                <Image
+                  src={dataSite.imagesHero[1]}
+                  alt='About LagoPiedra aviation experiences'
+                  fill
+                  className='object-cover'
+                />
               </div>
-            </motion.div>
-          </div>
-
-          {/* Right Column - Text & Process */}
-          <div className='lg:col-span-7 flex flex-col justify-center space-y-12'>
-            
-            <div className="space-y-6">
-               <h3 className="text-2xl font-medium text-foreground">Built for Tourism Aviation</h3>
-               <p className='text-lg text-muted-foreground leading-relaxed'>
-                At {dataSite.name}, we deliver aviation services and aerial shows designed for tourism destinations. We combine precise planning, clear coordination, and operational discipline so your guests enjoy an unforgettable experience—smoothly and responsibly.
-               </p>
-            </div>
-
-            <div className="h-px w-full bg-border" />
-
-            {/* Organizational List */}
-            <div className='grid grid-cols-1 sm:grid-cols-2 gap-x-12 gap-y-10'>
-              {[
-                { title: "Scenic Route Curation", desc: "Flight experiences designed around iconic views and guest comfort." },
-                { title: "Event-Day Execution", desc: "Flyovers and aerial performances aligned to your program timing." },
-                { title: "Safety & Compliance", desc: "Briefings, coordination, and operational controls that put safety first." },
-                { title: "Partner Coordination", desc: "Smooth collaboration with venues, tourism teams, and local stakeholders." }
-              ].map((item, i) => (
-                <div key={i} className='group'>
-                  <div className="flex items-baseline gap-3 mb-2">
-                    <span className="font-mono text-xs text-primary/40">0{i + 1}</span>
-                    <h4 className="font-medium text-foreground group-hover:text-primary transition-colors">{item.title}</h4>
-                  </div>
-                  <p className="text-sm text-muted-foreground leading-relaxed pl-7 border-l border-border group-hover:border-primary/30 transition-colors duration-300">
-                    {item.desc}
-                  </p>
+              <div className='absolute inset-0 bg-gradient-to-t from-background via-background/35 to-transparent' />
+              <div className='relative p-8 md:p-10'>
+                <p className='text-xs font-semibold tracking-[0.18em] uppercase text-muted-foreground'>
+                  About
+                </p>
+                <h2 className='mt-4 text-3xl md:text-4xl font-semibold tracking-tight text-foreground'>
+                  The team behind destination-ready aviation.
+                </h2>
+                <p className='mt-4 text-sm md:text-base leading-relaxed text-muted-foreground max-w-xl'>
+                  We design operations that feel effortless for guests and predictable for partners—because in aviation, clarity is a feature.
+                </p>
+                <div className='mt-8 flex flex-wrap gap-2'>
+                  <span className='rounded-full border border-border/60 bg-secondary/25 px-4 py-2 text-xs font-semibold tracking-[0.18em] uppercase text-muted-foreground'>
+                    Briefings
+                  </span>
+                  <span className='rounded-full border border-border/60 bg-secondary/25 px-4 py-2 text-xs font-semibold tracking-[0.18em] uppercase text-muted-foreground'>
+                    Coordination
+                  </span>
+                  <span className='rounded-full border border-border/60 bg-secondary/25 px-4 py-2 text-xs font-semibold tracking-[0.18em] uppercase text-muted-foreground'>
+                    Guest-first
+                  </span>
                 </div>
-              ))}
+              </div>
+            </div>
+          </motion.div>
+
+          <div className='lg:col-span-6 lg:pt-8'>
+            <div className='flex items-end justify-between gap-6'>
+              <div className='space-y-3'>
+                <div className='inline-flex items-center gap-3 rounded-full border border-border/60 bg-background/25 px-4 py-2 backdrop-blur-xl'>
+                  <span className='h-2 w-2 rounded-full bg-primary' />
+                  <span className='text-xs font-semibold tracking-[0.18em] uppercase text-muted-foreground'>
+                    Operating Principles
+                  </span>
+                </div>
+                <p className='text-lg md:text-xl font-semibold tracking-tight text-foreground'>
+                  Precision, without the bureaucracy.
+                </p>
+              </div>
+              <Link href='/services' className='shrink-0 hidden sm:block'>
+                <Button
+                  variant='outline'
+                  className='h-11 rounded-2xl border-border/70 bg-background/20 px-5 font-semibold hover:bg-secondary/70'
+                >
+                  Explore Services <ArrowRight className='ml-2 h-4 w-4' />
+                </Button>
+              </Link>
             </div>
 
-          </div>
+            <div className='mt-10 relative'>
+              <div className='absolute left-3 top-0 bottom-0 w-px bg-gradient-to-b from-primary/40 via-border/60 to-transparent' />
+              <div className='grid gap-4'>
+                {[
+                  {
+                    title: 'Scenic Route Curation',
+                    desc: 'Flight experiences designed around iconic views and guest comfort.',
+                  },
+                  {
+                    title: 'Event-Day Execution',
+                    desc: 'Flyovers and aerial performances aligned to your program timing.',
+                  },
+                  {
+                    title: 'Safety & Compliance',
+                    desc: 'Briefings, coordination, and operational controls that put safety first.',
+                  },
+                  {
+                    title: 'Partner Coordination',
+                    desc: 'Smooth collaboration with venues, tourism teams, and local stakeholders.',
+                  },
+                ].map((item, i) => (
+                  <motion.div
+                    key={item.title}
+                    initial={{ opacity: 0, x: 16 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.45, delay: i * 0.06, ease: 'easeOut' }}
+                    viewport={{ once: true }}
+                    className='relative pl-10'
+                  >
+                    <div className='absolute left-0 top-4 h-6 w-6 rounded-2xl border border-border/70 bg-secondary/30 text-primary flex items-center justify-center text-xs font-semibold'>
+                      {String(i + 1).padStart(2, '0')}
+                    </div>
+                    <div className='rounded-3xl border border-border/60 bg-background/25 p-6 backdrop-blur-xl'>
+                      <p className='text-base font-semibold text-foreground'>{item.title}</p>
+                      <p className='mt-2 text-sm leading-relaxed text-muted-foreground'>{item.desc}</p>
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
+            </div>
 
+            <div className='mt-8 sm:hidden'>
+              <Link href='/services'>
+                <Button className='h-12 w-full rounded-2xl bg-primary text-primary-foreground hover:bg-primary/90 font-semibold shadow-[0_10px_35px_rgba(56,189,248,0.25)]'>
+                  Explore Services <ArrowRight className='ml-2 h-4 w-4' />
+                </Button>
+              </Link>
+            </div>
+          </div>
         </div>
       </div>
     </section>

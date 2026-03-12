@@ -26,101 +26,121 @@ export function Header() {
   const isProducts = pathname === '/products';
 
   return (
-    <header className="fixed top-0 z-50 w-full bg-background/80 backdrop-blur-md border-b border-border transition-all">
-      <div className='container mx-auto flex items-center justify-between px-6 h-20'>
-        {/* Logo */}
-        <Link href='/' className='flex items-center gap-3 group'>
-          <Logo />
-          <span className='font-bold text-xl tracking-tight text-foreground'>
-            {dataSite.shortName}
-          </span>
-        </Link>
+    <header className='fixed inset-x-0 top-0 z-50'>
+      <div className='mx-auto flex max-w-6xl items-center justify-between px-4 pt-4'>
+        <div className='flex w-full items-center justify-between rounded-2xl border border-border/60 bg-background/30 px-4 py-3 backdrop-blur-xl shadow-[0_0_0_1px_rgba(255,255,255,0.05),0_30px_80px_rgba(0,0,0,0.55)]'>
+          <Link href='/' className='flex items-center gap-3'>
+            <div className='relative'>
+              <div className='absolute inset-0 rounded-xl bg-primary/20 blur-lg' />
+              <Logo className='relative' />
+            </div>
+            <span className='text-sm font-semibold tracking-[0.18em] text-foreground uppercase'>
+              {dataSite.shortName}
+            </span>
+          </Link>
 
-        {/* Desktop Nav */}
-        <nav className='hidden md:flex items-center gap-10'>
-          {dataSite.navLinks.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              className='text-sm font-medium text-muted-foreground hover:text-primary transition-colors'
-            >
-              {link.label}
-            </Link>
-          ))}
-        </nav>
+          <nav className='hidden md:flex items-center gap-2'>
+            {dataSite.navLinks.map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                className={cn(
+                  'rounded-full px-4 py-2 text-sm font-medium transition-all',
+                  'text-muted-foreground hover:text-foreground hover:bg-secondary/60',
+                  pathname === link.href && 'text-foreground bg-secondary/70'
+                )}
+              >
+                {link.label}
+              </Link>
+            ))}
+          </nav>
 
-        <div className='flex items-center gap-4'>
-          <div className='hidden md:flex items-center gap-4'>
-            {isProducts && (
-              <ButtonShoppingCart
-                onClick={() => router.push('/my-cart')}
-                count={products.length}
-              />
-            )}
-            <Button 
-              onClick={() => router.push('/contact')} 
-              className="bg-primary text-primary-foreground hover:bg-primary/90 font-medium px-6 rounded-md shadow-sm transition-all"
-            >
-              Request Proposal
-            </Button>
-          </div>
+          <div className='flex items-center gap-2'>
+            <div className='hidden md:flex items-center gap-2'>
+              {isProducts && (
+                <ButtonShoppingCart
+                  onClick={() => router.push('/my-cart')}
+                  count={products.length}
+                />
+              )}
+              <Button
+                onClick={() => router.push('/contact')}
+                className='h-10 rounded-full bg-primary text-primary-foreground hover:bg-primary/90 px-5 font-semibold shadow-[0_10px_35px_rgba(56,189,248,0.25)]'
+              >
+                Request Proposal
+              </Button>
+            </div>
 
-          {/* Mobile Menu */}
-          <div className='md:hidden'>
-            <Sheet open={isOpen} onOpenChange={setIsOpen}>
-              <SheetTrigger asChild>
-                <Button variant='ghost' size='icon' className="text-foreground hover:bg-secondary rounded-md">
-                  <Menu className="h-6 w-6" />
-                  <span className='sr-only'>Open menu</span>
-                </Button>
-              </SheetTrigger>
-              <SheetContent side='right' className='w-full sm:w-[300px] p-0 border-l border-border'>
-                <SheetHeader className="p-6 border-b border-border bg-muted/30">
-                  <div className='flex justify-between items-center'>
-                    <Link
-                      href='/'
-                      className='flex items-center gap-2'
-                      onClick={() => setIsOpen(false)}
-                    >
-                      <span className='font-bold text-xl tracking-tight'>
-                        {dataSite.shortName}
-                      </span>
-                    </Link>
-                    <Button
-                      variant='ghost'
-                      size='icon'
-                      onClick={() => setIsOpen(false)}
-                      className="rounded-full hover:bg-secondary"
-                    >
-                      <X className='h-5 w-5' />
-                    </Button>
+            <div className='md:hidden'>
+              <Sheet open={isOpen} onOpenChange={setIsOpen}>
+                <SheetTrigger asChild>
+                  <Button
+                    variant='ghost'
+                    size='icon'
+                    className='h-10 w-10 rounded-full text-foreground hover:bg-secondary/70'
+                  >
+                    <Menu className='h-5 w-5' />
+                    <span className='sr-only'>Open menu</span>
+                  </Button>
+                </SheetTrigger>
+                <SheetContent
+                  side='right'
+                  className='w-full sm:w-[360px] p-0 border-l border-border bg-background/95 backdrop-blur-xl'
+                >
+                  <SheetHeader className='p-6 border-b border-border/70'>
+                    <div className='flex items-center justify-between'>
+                      <Link
+                        href='/'
+                        className='flex items-center gap-3'
+                        onClick={() => setIsOpen(false)}
+                      >
+                        <span className='text-sm font-semibold tracking-[0.18em] uppercase'>
+                          {dataSite.shortName}
+                        </span>
+                      </Link>
+                      <Button
+                        variant='ghost'
+                        size='icon'
+                        onClick={() => setIsOpen(false)}
+                        className='h-10 w-10 rounded-full hover:bg-secondary/70'
+                      >
+                        <X className='h-5 w-5' />
+                      </Button>
+                    </div>
+                  </SheetHeader>
+
+                  <div className='p-6'>
+                    <div className='grid gap-2'>
+                      {dataSite.navLinks.map((link) => (
+                        <Link
+                          key={link.href}
+                          href={link.href}
+                          className={cn(
+                            'rounded-2xl border border-border/70 bg-secondary/30 px-4 py-4 text-base font-semibold text-foreground',
+                            'hover:bg-secondary/60 transition-all'
+                          )}
+                          onClick={() => setIsOpen(false)}
+                        >
+                          {link.label}
+                        </Link>
+                      ))}
+                    </div>
+
+                    <div className='mt-6'>
+                      <Button
+                        onClick={() => {
+                          router.push('/contact');
+                          setIsOpen(false);
+                        }}
+                        className='h-12 w-full rounded-2xl bg-primary text-primary-foreground hover:bg-primary/90 font-semibold shadow-[0_10px_35px_rgba(56,189,248,0.25)]'
+                      >
+                        Request Proposal
+                      </Button>
+                    </div>
                   </div>
-                </SheetHeader>
-                <div className='flex flex-col p-6 gap-2'>
-                  {dataSite.navLinks.map((link) => (
-                    <Link
-                      key={link.href}
-                      href={link.href}
-                      className='text-lg font-medium text-foreground hover:text-primary py-3 px-4 hover:bg-secondary rounded-md transition-all'
-                      onClick={() => setIsOpen(false)}
-                    >
-                      {link.label}
-                    </Link>
-                  ))}
-                  <div className="mt-6 pt-6 border-t border-border">
-                    <Button 
-                      onClick={() => {
-                        router.push('/contact');
-                        setIsOpen(false);
-                      }}
-                      className="w-full bg-primary text-primary-foreground hover:bg-primary/90 font-medium py-6 rounded-md shadow-sm"
-                    >
-                      Request Proposal
-                    </Button>
-                  </div>
-                </div>
-              </SheetContent>
-            </Sheet>
+                </SheetContent>
+              </Sheet>
+            </div>
           </div>
         </div>
       </div>
@@ -139,12 +159,12 @@ function ButtonShoppingCart({
     <Button
       variant='outline'
       size='icon'
-      className='relative rounded-md border-border hover:bg-secondary hover:text-foreground transition-all'
+      className='relative h-10 w-10 rounded-full border-border/70 bg-background/20 hover:bg-secondary/70 hover:text-foreground transition-all'
       onClick={onClick}
     >
       <ShoppingBag className='h-5 w-5' />
       {count > 0 && (
-        <span className='absolute -top-1 -right-1 flex h-4 w-4 items-center justify-center bg-primary text-[10px] font-bold text-primary-foreground rounded-full'>
+        <span className='absolute -top-1 -right-1 flex h-4 w-4 items-center justify-center rounded-full bg-primary text-[10px] font-bold text-primary-foreground'>
           {count}
         </span>
       )}

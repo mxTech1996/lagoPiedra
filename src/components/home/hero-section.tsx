@@ -6,130 +6,176 @@ import { dataSite } from '@/lib/data';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, Radar, ShieldCheck, Sparkles } from 'lucide-react';
 
 export function HeroSection() {
   return (
-    <section className='relative w-full pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden bg-background'>
-      <div className='container mx-auto px-6 relative z-10'>
-        <div className='max-w-4xl mx-auto text-center'>
+    <section className='relative w-full overflow-hidden pt-32 md:pt-40 pb-20'>
+      <div className='absolute inset-0 -z-10'>
+        <div className='absolute inset-0 opacity-30'>
+          <Image
+            src={dataSite.imagesHero[0]}
+            alt='Aerial view over a tourism coastline'
+            fill
+            priority
+            className='object-cover'
+          />
+        </div>
+        <div className='absolute inset-0 bg-gradient-to-b from-background/20 via-background/70 to-background' />
+        <div className='absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(56,189,248,0.18),transparent_52%)]' />
+      </div>
+
+      <div className='container mx-auto px-6'>
+        <div className='grid grid-cols-1 gap-10 lg:grid-cols-12 lg:gap-12'>
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, ease: "easeOut" }}
-            className="flex flex-col items-center"
+            transition={{ duration: 0.55, ease: 'easeOut' }}
+            className='lg:col-span-6'
           >
-            <div className="mb-6 inline-flex items-center gap-2 px-3 py-1 rounded-full border border-border bg-secondary/50 backdrop-blur-sm">
-              <span className="w-1.5 h-1.5 rounded-full bg-primary" />
-              <span className="text-xs font-mono uppercase tracking-widest text-muted-foreground">
-                Est. 2024 — Tourism Aviation
+            <div className='inline-flex items-center gap-3 rounded-full border border-border/60 bg-background/30 px-4 py-2 backdrop-blur-xl'>
+              <span className='inline-flex h-7 w-7 items-center justify-center rounded-full bg-primary/20 text-primary'>
+                <Radar className='h-4 w-4' />
+              </span>
+              <span className='text-xs font-semibold tracking-[0.18em] uppercase text-muted-foreground'>
+                Tourism aviation • est. 2024
               </span>
             </div>
-            
-            <h1 className='text-5xl md:text-7xl lg:text-8xl font-bold tracking-tighter text-foreground mb-8 leading-[0.9]'>
-              Aviation <span className="text-muted-foreground font-normal italic">&</span><br />
-              Aerial Shows.
+
+            <h1 className='mt-8 text-5xl md:text-6xl lg:text-7xl font-semibold tracking-tight text-foreground'>
+              Flights, flyovers, and
+              <span className='block text-primary'> unforgettable views.</span>
             </h1>
-            
-            <p className='text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed mb-10'>
-              {dataSite.description} From scenic routes to event-day flyovers, we handle planning, coordination, and execution with a guest-first mindset.
+
+            <p className='mt-6 text-base md:text-lg leading-relaxed text-muted-foreground max-w-xl'>
+              {dataSite.description} Built for resorts, festivals, and destination campaigns—designed to feel premium, run smoothly, and stay safe.
             </p>
 
-            <div className='flex flex-col sm:flex-row gap-4 w-full justify-center'>
+            <div className='mt-10 flex flex-col sm:flex-row gap-3'>
               <Link href='/products'>
-                <Button size="lg" className='h-12 px-8 rounded-full bg-primary text-primary-foreground hover:bg-primary/90 text-base font-medium shadow-sm transition-transform hover:scale-105'>
-                  Explore Experiences
+                <Button className='h-12 rounded-2xl bg-primary text-primary-foreground hover:bg-primary/90 px-6 font-semibold shadow-[0_10px_35px_rgba(56,189,248,0.25)]'>
+                  Explore Experiences <ArrowRight className='ml-2 h-4 w-4' />
                 </Button>
               </Link>
               <Link href='/contact'>
-                <Button variant='outline' size="lg" className='h-12 px-8 rounded-full border-border hover:bg-secondary text-base font-medium transition-transform hover:scale-105'>
+                <Button
+                  variant='outline'
+                  className='h-12 rounded-2xl border-border/70 bg-background/20 px-6 font-semibold hover:bg-secondary/70'
+                >
                   Request a Proposal
                 </Button>
               </Link>
             </div>
-          </motion.div>
-        </div>
 
-        {/* Minimalist Visual Grid - Split Layout */}
-        <div className="mt-20 grid grid-cols-1 md:grid-cols-12 gap-4 md:h-[600px]">
-          
-          {/* Primary View - Wide */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.98, y: 40 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2, ease: "circOut" }}
-            className="md:col-span-8 relative h-[300px] md:h-full rounded-lg overflow-hidden group"
-          >
-            <Image
-              src={dataSite.imagesHero[0]}
-              alt="Aerial view over a tourism coastline"
-              fill
-              className='object-cover grayscale group-hover:grayscale-0 transition-all duration-700'
-              priority
-            />
-            <div className="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors duration-700" />
-            
-            {/* Technical Overlay 1 */}
-            <div className="absolute top-4 left-4 bg-black/40 backdrop-blur-sm border border-white/10 px-3 py-1">
-               <span className="text-[10px] font-mono text-white/90 tracking-widest">FLIGHT_FEED_01 // WIDE</span>
-            </div>
-
-            <div className="absolute bottom-0 left-0 w-full p-6 border-t border-white/10 bg-black/40 backdrop-blur-md flex justify-between items-end text-white/80 font-mono text-xs md:text-sm">
-               <div>
-                  <p className="text-white font-semibold">AIRSPACE_OVERVIEW</p>
-                  <p className="text-white/60 text-[10px]">STATUS: READY</p>
-               </div>
-               <div className="text-right hidden sm:block">
-                  <p>WIND: 8kt</p>
-                  <p>VIS: 10km+</p>
-               </div>
+            <div className='mt-10 grid grid-cols-1 sm:grid-cols-3 gap-3 max-w-xl'>
+              <div className='rounded-2xl border border-border/60 bg-background/25 p-4 backdrop-blur-xl'>
+                <div className='flex items-center gap-2 text-primary'>
+                  <ShieldCheck className='h-4 w-4' />
+                  <span className='text-xs font-semibold tracking-[0.18em] uppercase'>Safety</span>
+                </div>
+                <p className='mt-2 text-sm text-muted-foreground'>Briefings, coordination, and operational discipline.</p>
+              </div>
+              <div className='rounded-2xl border border-border/60 bg-background/25 p-4 backdrop-blur-xl'>
+                <div className='flex items-center gap-2 text-primary'>
+                  <Sparkles className='h-4 w-4' />
+                  <span className='text-xs font-semibold tracking-[0.18em] uppercase'>Experience</span>
+                </div>
+                <p className='mt-2 text-sm text-muted-foreground'>Routes and show moments designed to impress.</p>
+              </div>
+              <div className='rounded-2xl border border-border/60 bg-background/25 p-4 backdrop-blur-xl'>
+                <div className='flex items-center gap-2 text-primary'>
+                  <ArrowRight className='h-4 w-4' />
+                  <span className='text-xs font-semibold tracking-[0.18em] uppercase'>Timing</span>
+                </div>
+                <p className='mt-2 text-sm text-muted-foreground'>Schedules tuned for events and guest arrivals.</p>
+              </div>
             </div>
           </motion.div>
 
-          {/* Secondary View - Detail/Vertical */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.98, y: 40 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.3, ease: "circOut" }}
-            className="md:col-span-4 relative h-[300px] md:h-full rounded-lg overflow-hidden group"
+            initial={{ opacity: 0, y: 26 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.15, ease: 'easeOut' }}
+            className='lg:col-span-6'
           >
-            <Image
-              src={dataSite.imagesHero[1]}
-              alt="Aircraft detail over a tourism destination"
-              fill
-              className='object-cover grayscale group-hover:grayscale-0 transition-all duration-700'
-              priority
-            />
-            <div className="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors duration-700" />
-             
-            {/* Technical Overlay 2 */}
-            <div className="absolute top-4 left-4 bg-black/40 backdrop-blur-sm border border-white/10 px-3 py-1">
-               <span className="text-[10px] font-mono text-white/90 tracking-widest">FLIGHT_FEED_02 // DETAIL</span>
-            </div>
+            <div className='relative grid gap-4'>
+              <div className='relative overflow-hidden rounded-3xl border border-border/60 bg-background/25 backdrop-blur-xl'>
+                <div className='absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(56,189,248,0.12),transparent_55%)]' />
+                <div className='relative p-6 md:p-8'>
+                  <div className='flex items-center justify-between'>
+                    <div>
+                      <p className='text-xs font-semibold tracking-[0.18em] uppercase text-muted-foreground'>
+                        Flight Panel
+                      </p>
+                      <p className='mt-2 text-lg font-semibold text-foreground'>
+                        Destination-ready operations
+                      </p>
+                    </div>
+                    <div className='rounded-2xl border border-border/60 bg-secondary/30 px-4 py-2 text-xs font-semibold tracking-[0.18em] uppercase text-muted-foreground'>
+                      Live
+                    </div>
+                  </div>
 
-            <div className="absolute bottom-0 left-0 w-full p-6 border-t border-white/10 bg-black/40 backdrop-blur-md">
-               <div className="font-mono text-xs text-white/80 space-y-1">
-                  <div className="flex justify-between border-b border-white/10 pb-1">
-                    <span>ALT</span>
-                    <span>1,200ft</span>
+                  <div className='mt-6 grid grid-cols-2 gap-3'>
+                    <div className='rounded-2xl border border-border/60 bg-secondary/20 p-4'>
+                      <p className='text-xs font-semibold tracking-[0.18em] uppercase text-muted-foreground'>Altitude</p>
+                      <p className='mt-2 text-2xl font-semibold text-foreground'>1,200ft</p>
+                    </div>
+                    <div className='rounded-2xl border border-border/60 bg-secondary/20 p-4'>
+                      <p className='text-xs font-semibold tracking-[0.18em] uppercase text-muted-foreground'>Speed</p>
+                      <p className='mt-2 text-2xl font-semibold text-foreground'>95kt</p>
+                    </div>
+                    <div className='col-span-2 rounded-2xl border border-border/60 bg-secondary/20 p-4 flex items-center justify-between'>
+                      <div>
+                        <p className='text-xs font-semibold tracking-[0.18em] uppercase text-muted-foreground'>Status</p>
+                        <p className='mt-2 text-sm font-semibold text-foreground'>Ready for takeoff window</p>
+                      </div>
+                      <div className='h-10 w-10 rounded-2xl bg-primary/20 text-primary flex items-center justify-center'>
+                        <Radar className='h-5 w-5' />
+                      </div>
+                    </div>
                   </div>
-                  <div className="flex justify-between border-b border-white/10 pb-1 pt-1">
-                    <span>SPEED</span>
-                    <span>95kt</span>
+                </div>
+              </div>
+
+              <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
+                <div className='relative overflow-hidden rounded-3xl border border-border/60 bg-background/25 backdrop-blur-xl'>
+                  <div className='absolute inset-0 opacity-80'>
+                    <Image
+                      src={dataSite.imagesHero[1]}
+                      alt='Aircraft detail over a tourism destination'
+                      fill
+                      className='object-cover'
+                    />
                   </div>
-                  <div className="flex justify-between pt-1">
-                    <span>ETA</span>
-                    <span>06:40</span>
+                  <div className='absolute inset-0 bg-gradient-to-t from-background via-background/40 to-transparent' />
+                  <div className='relative p-6'>
+                    <p className='text-xs font-semibold tracking-[0.18em] uppercase text-muted-foreground'>
+                      Aerial Shows
+                    </p>
+                    <p className='mt-2 text-lg font-semibold text-foreground'>Built for events</p>
+                    <p className='mt-2 text-sm text-muted-foreground'>Flyovers and performances synced to your program.</p>
                   </div>
-               </div>
+                </div>
+
+                <div className='relative overflow-hidden rounded-3xl border border-border/60 bg-background/25 backdrop-blur-xl'>
+                  <div className='absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(250,204,21,0.12),transparent_60%)]' />
+                  <div className='relative p-6'>
+                    <p className='text-xs font-semibold tracking-[0.18em] uppercase text-muted-foreground'>
+                      Production Support
+                    </p>
+                    <p className='mt-2 text-lg font-semibold text-foreground'>Cinematic flight paths</p>
+                    <p className='mt-2 text-sm text-muted-foreground'>Stabilized passes and timing for shot lists.</p>
+                    <div className='mt-5 inline-flex items-center gap-2 rounded-full border border-border/60 bg-secondary/25 px-4 py-2 text-xs font-semibold tracking-[0.18em] uppercase text-muted-foreground'>
+                      Golden-hour ready
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </motion.div>
         </div>
       </div>
-
-      {/* Decorative Grid Background */}
-      <div className="absolute inset-0 -z-10 h-full w-full bg-background bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]"></div>
-      <div className="absolute left-0 right-0 top-0 -z-10 m-auto h-[310px] w-[310px] rounded-full bg-primary/5 opacity-20 blur-[100px]"></div>
     </section>
   );
 }

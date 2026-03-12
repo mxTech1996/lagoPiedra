@@ -66,56 +66,68 @@ export default function ContactPage() {
   }
 
   return (
-    <div className="w-full min-h-screen pt-32 pb-16 bg-slate-50 relative overflow-hidden">
-      <div className="container mx-auto px-4 relative z-10">
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-24 items-start">
+    <div className="w-full min-h-screen pt-32 pb-20 relative overflow-hidden">
+      <div className="container mx-auto px-6 relative z-10">
+        <div className="grid lg:grid-cols-12 gap-8 lg:gap-10 items-start">
           {/* Contact Info Side */}
           <motion.div 
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5 }}
-            className="space-y-12 lg:sticky lg:top-32"
+            className="space-y-10 lg:sticky lg:top-28 lg:col-span-5"
           >
             <div>
-               <div className="inline-block bg-primary/10 px-4 py-2 rounded-full mb-6">
-                 <span className='text-sm font-semibold uppercase tracking-widest text-primary'>Contact Us</span>
-               </div>
-              <h1 className="text-4xl md:text-6xl font-bold tracking-tight text-slate-900 mb-6">
+              <div className="inline-flex items-center gap-3 rounded-full border border-border/60 bg-background/25 px-4 py-2 backdrop-blur-xl">
+                <span className="h-2 w-2 rounded-full bg-primary" />
+                <span className="text-xs font-semibold tracking-[0.18em] uppercase text-muted-foreground">Contact</span>
+              </div>
+              <h1 className="mt-8 text-4xl md:text-5xl font-semibold tracking-tight text-foreground">
                 Request Information
               </h1>
-              <p className="text-lg text-slate-600 max-w-lg leading-relaxed">
+              <p className="mt-5 text-sm md:text-base text-muted-foreground max-w-lg leading-relaxed">
                 Planning a scenic flight experience, an aerial show, or production support in a tourism destination? Send details and we&apos;ll reply with a clear proposal.
               </p>
             </div>
 
-            <div className="space-y-8">
-              <div className="flex items-start gap-6 group">
-                <div className="p-3 bg-white text-slate-600 rounded-lg shadow-sm border border-slate-200 group-hover:text-primary transition-colors">
-                   <Mail className="w-6 h-6" />
+            <div className="grid gap-3">
+              <a
+                href={`mailto:${dataSite.email}`}
+                className="group rounded-3xl border border-border/60 bg-background/25 p-6 backdrop-blur-xl transition-all hover:bg-background/35"
+              >
+                <div className="flex items-start gap-4">
+                  <div className="h-12 w-12 rounded-2xl border border-border/60 bg-secondary/25 flex items-center justify-center text-primary">
+                    <Mail className="h-5 w-5" />
+                  </div>
+                  <div className="min-w-0">
+                    <p className="text-xs font-semibold tracking-[0.18em] uppercase text-muted-foreground">Email</p>
+                    <p className="mt-2 text-sm font-semibold text-foreground break-all group-hover:text-primary transition-colors">
+                      {dataSite.email}
+                    </p>
+                  </div>
                 </div>
-                <div>
-                  <h3 className="text-lg font-bold text-slate-900 mb-1">Email Us</h3>
-                  <p className="text-slate-600 text-base">{dataSite.email}</p>
+              </a>
+
+              <div className="rounded-3xl border border-border/60 bg-background/25 p-6 backdrop-blur-xl">
+                <div className="flex items-start gap-4">
+                  <div className="h-12 w-12 rounded-2xl border border-border/60 bg-secondary/25 flex items-center justify-center text-primary">
+                    <Phone className="h-5 w-5" />
+                  </div>
+                  <div className="min-w-0">
+                    <p className="text-xs font-semibold tracking-[0.18em] uppercase text-muted-foreground">Phone</p>
+                    <p className="mt-2 text-sm font-semibold text-foreground">{dataSite.telephone}</p>
+                  </div>
                 </div>
               </div>
 
-              <div className="flex items-start gap-6 group">
-                <div className="p-3 bg-white text-slate-600 rounded-lg shadow-sm border border-slate-200 group-hover:text-primary transition-colors">
-                   <Phone className="w-6 h-6" />
-                </div>
-                <div>
-                  <h3 className="text-lg font-bold text-slate-900 mb-1">Call Us</h3>
-                  <p className="text-slate-600 text-base">{dataSite.telephone}</p>
-                </div>
-              </div>
-
-              <div className="flex items-start gap-6 group">
-                <div className="p-3 bg-white text-slate-600 rounded-lg shadow-sm border border-slate-200 group-hover:text-primary transition-colors">
-                   <MapPin className="w-6 h-6" />
-                </div>
-                <div>
-                  <h3 className="text-lg font-bold text-slate-900 mb-1">Visit Us</h3>
-                  <p className="text-slate-600 text-base">{dataSite.address}</p>
+              <div className="rounded-3xl border border-border/60 bg-background/25 p-6 backdrop-blur-xl">
+                <div className="flex items-start gap-4">
+                  <div className="h-12 w-12 rounded-2xl border border-border/60 bg-secondary/25 flex items-center justify-center text-primary">
+                    <MapPin className="h-5 w-5" />
+                  </div>
+                  <div className="min-w-0">
+                    <p className="text-xs font-semibold tracking-[0.18em] uppercase text-muted-foreground">Location</p>
+                    <p className="mt-2 text-sm font-semibold text-foreground">{dataSite.address}</p>
+                  </div>
                 </div>
               </div>
             </div>
@@ -126,18 +138,23 @@ export default function ContactPage() {
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="bg-white rounded-2xl shadow-sm border border-slate-100 p-8 md:p-12"
+            className="lg:col-span-7 relative overflow-hidden rounded-3xl border border-border/60 bg-background/25 p-8 md:p-12 backdrop-blur-xl shadow-[0_40px_120px_rgba(0,0,0,0.55)]"
           >
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(56,189,248,0.14),transparent_60%)]" />
             <Form {...form}>
-              <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+              <form onSubmit={form.handleSubmit(onSubmit)} className="relative space-y-6">
                 <FormField
                   control={form.control}
                   name="name"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel className="text-sm font-semibold text-slate-700 uppercase tracking-wide">Name</FormLabel>
+                      <FormLabel className="text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">Name</FormLabel>
                       <FormControl>
-                        <Input placeholder="John Doe" {...field} className="h-12 border-slate-200 rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary font-medium text-slate-900 bg-slate-50/50" />
+                        <Input
+                          placeholder="John Doe"
+                          {...field}
+                          className="h-12 rounded-2xl border-border/70 bg-background/20 text-foreground placeholder:text-muted-foreground/70"
+                        />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -148,9 +165,13 @@ export default function ContactPage() {
                   name="email"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel className="text-sm font-semibold text-slate-700 uppercase tracking-wide">Email</FormLabel>
+                      <FormLabel className="text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">Email</FormLabel>
                       <FormControl>
-                        <Input placeholder="john@example.com" {...field} className="h-12 border-slate-200 rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary font-medium text-slate-900 bg-slate-50/50" />
+                        <Input
+                          placeholder="john@example.com"
+                          {...field}
+                          className="h-12 rounded-2xl border-border/70 bg-background/20 text-foreground placeholder:text-muted-foreground/70"
+                        />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -161,11 +182,11 @@ export default function ContactPage() {
                   name="message"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel className="text-sm font-semibold text-slate-700 uppercase tracking-wide">Message</FormLabel>
+                      <FormLabel className="text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">Message</FormLabel>
                       <FormControl>
                         <Textarea
                           placeholder="Tell us the destination, preferred dates, group size, and what you want to create..."
-                          className="min-h-[150px] border-slate-200 rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary font-medium text-slate-900 resize-none bg-slate-50/50"
+                          className="min-h-[160px] rounded-2xl border-border/70 bg-background/20 text-foreground placeholder:text-muted-foreground/70 resize-none"
                           {...field}
                         />
                       </FormControl>
@@ -176,7 +197,7 @@ export default function ContactPage() {
                 <Button
                   type="submit"
                   disabled={form.formState.isSubmitting}
-                  className="w-full h-14 text-lg font-semibold tracking-wide bg-slate-900 text-white hover:bg-slate-800 transition-all rounded-lg shadow-sm hover:shadow-md"
+                  className="w-full h-14 rounded-2xl bg-primary text-primary-foreground hover:bg-primary/90 text-base font-semibold shadow-[0_10px_35px_rgba(56,189,248,0.25)]"
                 >
                   {form.formState.isSubmitting ? (
                     <>

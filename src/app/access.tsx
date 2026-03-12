@@ -72,14 +72,20 @@ const LoginPage = () => {
   };
 
   return (
-    <main>
-      <main className='flex items-center justify-center min-h-screen bg-slate-50'>
-        <div className='w-full max-w-md p-8 space-y-8 bg-white border border-slate-200 text-slate-900 rounded-lg shadow-sm'>
+    <main className='flex min-h-screen items-center justify-center px-6 py-16'>
+      <div className='relative w-full max-w-md overflow-hidden rounded-3xl border border-border/60 bg-background/25 p-8 backdrop-blur-xl shadow-[0_40px_120px_rgba(0,0,0,0.55)]'>
+        <div className='absolute inset-0 -z-10 bg-[radial-gradient(circle_at_top,rgba(56,189,248,0.16),transparent_60%)]' />
           {/* Header Section */}
           <div className='text-center'>
-            <h1 className='text-3xl font-bold tracking-tight text-slate-900'>Welcome Back</h1>
-            <p className='mt-2 text-slate-500'>
-              Please sign in to access your account
+            <div className='inline-flex items-center gap-3 rounded-full border border-border/60 bg-secondary/25 px-4 py-2'>
+              <span className='h-2 w-2 rounded-full bg-primary' />
+              <span className='text-xs font-semibold tracking-[0.18em] uppercase text-muted-foreground'>
+                Access
+              </span>
+            </div>
+            <h1 className='mt-8 text-3xl font-semibold tracking-tight text-foreground'>Welcome Back</h1>
+            <p className='mt-3 text-sm text-muted-foreground'>
+              Sign in to access the experience catalog.
             </p>
           </div>
 
@@ -89,7 +95,7 @@ const LoginPage = () => {
             <div>
               <label
                 htmlFor='email'
-                className='block mb-2 text-sm font-medium text-slate-700'
+                className='mb-2 block text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground'
               >
                 Username
               </label>
@@ -101,7 +107,7 @@ const LoginPage = () => {
                 required
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
-                className='w-full px-4 py-3 text-slate-900 bg-white border border-slate-200 rounded-md focus:outline-none focus:ring-2 focus:ring-slate-900 focus:border-transparent transition-all placeholder:text-slate-400'
+                className='w-full rounded-2xl border border-border/70 bg-background/20 px-4 py-3 text-foreground placeholder:text-muted-foreground/70 focus:outline-none focus:ring-2 focus:ring-ring'
                 placeholder='username'
               />
             </div>
@@ -110,7 +116,7 @@ const LoginPage = () => {
             <div>
               <label
                 htmlFor='password'
-                className='block mb-2 text-sm font-medium text-slate-700'
+                className='mb-2 block text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground'
               >
                 Password
               </label>
@@ -122,26 +128,29 @@ const LoginPage = () => {
                 required
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className='w-full px-4 py-3 text-slate-900 bg-white border border-slate-200 rounded-md focus:outline-none focus:ring-2 focus:ring-slate-900 focus:border-transparent transition-all placeholder:text-slate-400'
+                className='w-full rounded-2xl border border-border/70 bg-background/20 px-4 py-3 text-foreground placeholder:text-muted-foreground/70 focus:outline-none focus:ring-2 focus:ring-ring'
                 placeholder='••••••••'
               />
             </div>
 
             {/* Error Message */}
-            {error && <div className='text-sm text-red-600 font-medium bg-red-50 p-3 rounded-md text-center border border-red-200'>{error}</div>}
+            {error && (
+              <div className='rounded-2xl border border-destructive/40 bg-destructive/15 p-3 text-center text-sm font-medium text-destructive'>
+                {error}
+              </div>
+            )}
 
             {/* Submit Button */}
             <div>
               <button
                 type='submit'
-                className='w-full px-4 py-3 font-semibold text-white bg-slate-900 rounded-md hover:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-slate-900 transition-all duration-300 shadow-sm'
+                className='w-full rounded-2xl bg-primary px-4 py-3 font-semibold text-primary-foreground hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-ring shadow-[0_10px_35px_rgba(56,189,248,0.25)]'
               >
                 Sign In
               </button>
             </div>
           </form>
-        </div>
-      </main>
+      </div>
     </main>
   );
 };

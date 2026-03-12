@@ -228,8 +228,8 @@ const CartPage = () => {
   };
 
   return (
-    <main className='min-h-screen w-full pt-32 pb-20 bg-slate-50 relative overflow-hidden'>
-      <div className='container mx-auto px-4 relative z-10'>
+    <main className='min-h-screen w-full pt-32 pb-20 relative overflow-hidden'>
+      <div className='container mx-auto px-6 relative z-10'>
         {/* Header */}
         <div className='mb-12'>
           <Button
@@ -241,18 +241,19 @@ const CartPage = () => {
               }
             }}
             variant="ghost"
-            className='mb-6 hover:bg-transparent p-0 flex items-center gap-2 text-slate-600 hover:text-primary transition-colors font-semibold tracking-wide'
+            className='mb-6 hover:bg-transparent p-0 flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors font-semibold tracking-wide'
           >
             <ArrowLeft className="w-5 h-5" />
             {step === 'checkout' ? 'Back to Cart' : 'Continue Browsing'}
           </Button>
 
-          <div className="inline-block bg-primary/10 px-4 py-2 rounded-full mb-4">
-            <span className='text-sm font-semibold uppercase tracking-widest text-primary'>
+          <div className="inline-flex items-center gap-3 rounded-full border border-border/60 bg-background/25 px-4 py-2 backdrop-blur-xl mb-4">
+            <span className="h-2 w-2 rounded-full bg-primary" />
+            <span className='text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground'>
               {step === 'cart' ? 'Your Selection' : step === 'checkout' ? 'Secure Checkout' : 'Order Complete'}
             </span>
           </div>
-          <h1 className='text-4xl md:text-6xl font-bold tracking-tight text-slate-900'>
+          <h1 className='text-4xl md:text-6xl font-semibold tracking-tight text-foreground'>
             {step === 'cart' && 'Shopping Cart'}
             {step === 'checkout' && 'Payment Details'}
             {step === 'success' && 'Thank You'}
@@ -272,32 +273,32 @@ const CartPage = () => {
               {/* Cart Items */}
               <div className='lg:col-span-2 space-y-6'>
                 {products?.length === 0 ? (
-                  <div className='bg-white rounded-2xl p-12 text-center shadow-sm border border-slate-100'>
-                    <p className='text-xl font-bold mb-6 text-slate-900'>Your cart is empty</p>
+                  <div className='rounded-3xl border border-border/60 bg-background/25 p-12 text-center backdrop-blur-xl shadow-[0_40px_120px_rgba(0,0,0,0.55)]'>
+                    <p className='text-xl font-semibold mb-6 text-foreground'>Your cart is empty</p>
                     <Button 
                       onClick={() => router.push('/products')}
-                      className="h-12 px-8 rounded-lg bg-slate-900 text-white hover:bg-slate-800 font-semibold tracking-wide shadow-sm"
+                      className="h-12 px-8 rounded-2xl bg-primary text-primary-foreground hover:bg-primary/90 font-semibold shadow-[0_10px_35px_rgba(56,189,248,0.25)]"
                     >
                       Browse Experiences
                     </Button>
                   </div>
                 ) : (
                   products?.map((item, index) => (
-                    <div key={index} className='bg-white rounded-xl p-6 flex gap-6 items-center shadow-sm border border-slate-100 group hover:shadow-md transition-all duration-300'>
-                      <div className='w-24 h-24 bg-slate-50 rounded-lg relative flex-shrink-0 overflow-hidden'>
+                    <div key={index} className='group flex gap-6 items-center rounded-3xl border border-border/60 bg-background/25 p-6 backdrop-blur-xl transition-all hover:bg-background/35'>
+                      <div className='w-24 h-24 rounded-2xl border border-border/60 bg-secondary/25 relative flex-shrink-0 overflow-hidden'>
                         {item.image && (
                           <Image src={item.image} alt={item.name} fill className='object-cover' />
                         )}
                       </div>
                       <div className='flex-1'>
-                        <h3 className='text-lg font-bold mb-1 text-slate-900'>{item.name}</h3>
+                        <h3 className='text-lg font-semibold mb-1 text-foreground'>{item.name}</h3>
                         <p className='text-base font-semibold text-primary'>${item.price}</p>
                       </div>
                       <Button
                         onClick={() => handleAddOrRemoveProduct(item.id)}
                         size="icon"
                         variant="ghost"
-                        className='text-slate-400 hover:text-red-600 hover:bg-red-50 rounded-full'
+                        className='h-11 w-11 rounded-2xl text-muted-foreground hover:text-destructive hover:bg-destructive/15'
                       >
                         <Trash2 className='w-5 h-5' />
                       </Button>
@@ -309,14 +310,14 @@ const CartPage = () => {
               {/* Summary */}
               {products?.length > 0 && (
                 <div className='lg:col-span-1'>
-                  <div className='bg-white rounded-2xl p-8 shadow-sm border border-slate-100 sticky top-32'>
-                    <h3 className='text-xl font-bold mb-6 border-b border-slate-100 pb-4 text-slate-900'>Order Summary</h3>
+                  <div className='sticky top-32 rounded-3xl border border-border/60 bg-background/25 p-8 backdrop-blur-xl shadow-[0_40px_120px_rgba(0,0,0,0.55)]'>
+                    <h3 className='text-xl font-semibold mb-6 border-b border-border/60 pb-4 text-foreground'>Order Summary</h3>
                     <div className='flex justify-between items-center mb-4'>
-                      <span className='font-medium text-slate-600'>Subtotal</span>
-                      <span className='font-semibold text-slate-900'>${getTotalCart().toFixed(2)}</span>
+                      <span className='font-medium text-muted-foreground'>Subtotal</span>
+                      <span className='font-semibold text-foreground'>${getTotalCart().toFixed(2)}</span>
                     </div>
                     <div className='flex justify-between items-center mb-8 text-xl'>
-                      <span className='font-bold text-slate-900'>Total</span>
+                      <span className='font-semibold text-foreground'>Total</span>
                       <span className='font-bold text-primary'>${getTotalCart().toFixed(2)}</span>
                     </div>
                     
@@ -325,11 +326,11 @@ const CartPage = () => {
                         id="terms" 
                         checked={acceptedTerms}
                         onCheckedChange={setAcceptedTerms}
-                        className="rounded border-slate-300 data-[state=checked]:bg-slate-900 data-[state=checked]:text-white"
+                        className="rounded border-border data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground"
                       />
                       <label
                         htmlFor="terms"
-                        className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 text-slate-600"
+                        className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 text-muted-foreground"
                       >
                         Accept <Link href="/pdf/TYC.pdf" target="_blank" className="underline underline-offset-4 hover:text-primary transition-colors">Terms and Conditions</Link>
                       </label>
@@ -347,7 +348,7 @@ const CartPage = () => {
                         }
                         setStep('checkout');
                       }}
-                      className="w-full h-12 rounded-lg bg-slate-900 text-white hover:bg-slate-800 font-semibold tracking-wide shadow-sm"
+                      className="w-full h-12 rounded-2xl bg-primary text-primary-foreground hover:bg-primary/90 font-semibold shadow-[0_10px_35px_rgba(56,189,248,0.25)]"
                     >
                       Proceed to Checkout
                     </Button>
@@ -365,13 +366,14 @@ const CartPage = () => {
               exit={{ opacity: 0, x: -20 }}
               className='max-w-4xl mx-auto'
             >
-              <div className='bg-white rounded-2xl p-8 md:p-12 shadow-sm border border-slate-100'>
+              <div className='relative overflow-hidden rounded-3xl border border-border/60 bg-background/25 p-8 md:p-12 backdrop-blur-xl shadow-[0_40px_120px_rgba(0,0,0,0.55)]'>
+                <div className='absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(56,189,248,0.14),transparent_60%)]' />
                 <Form {...form}>
-                  <form onSubmit={form.handleSubmit(onSubmit)} className='space-y-8'>
+                  <form onSubmit={form.handleSubmit(onSubmit)} className='relative space-y-8'>
                     {/* Personal Info */}
                     <div>
-                      <h3 className='text-lg font-bold mb-6 flex items-center gap-3 text-slate-900'>
-                        <span className='bg-primary/10 text-primary w-8 h-8 flex items-center justify-center rounded-full text-sm font-bold'>1</span>
+                      <h3 className='text-lg font-semibold mb-6 flex items-center gap-3 text-foreground'>
+                        <span className='bg-primary/15 text-primary w-9 h-9 flex items-center justify-center rounded-2xl text-xs font-semibold tracking-[0.18em]'>01</span>
                         Personal Details
                       </h3>
                       <div className='grid md:grid-cols-2 gap-6'>
@@ -380,9 +382,9 @@ const CartPage = () => {
                           name="firstname"
                           render={({ field }) => (
                             <FormItem>
-                              <FormLabel className="font-semibold text-slate-700">First Name</FormLabel>
+                              <FormLabel className="text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">First Name</FormLabel>
                               <FormControl>
-                                <Input {...field} className="h-11 border-slate-200 rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary font-medium bg-slate-50/50 text-slate-900" />
+                                <Input {...field} className="h-11 rounded-2xl border-border/70 bg-background/20 text-foreground" />
                               </FormControl>
                               <FormMessage />
                             </FormItem>
@@ -393,9 +395,9 @@ const CartPage = () => {
                           name="lastname"
                           render={({ field }) => (
                             <FormItem>
-                              <FormLabel className="font-semibold text-slate-700">Last Name</FormLabel>
+                              <FormLabel className="text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">Last Name</FormLabel>
                               <FormControl>
-                                <Input {...field} className="h-11 border-slate-200 rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary font-medium bg-slate-50/50 text-slate-900" />
+                                <Input {...field} className="h-11 rounded-2xl border-border/70 bg-background/20 text-foreground" />
                               </FormControl>
                               <FormMessage />
                             </FormItem>
@@ -406,9 +408,9 @@ const CartPage = () => {
                           name="email"
                           render={({ field }) => (
                             <FormItem>
-                              <FormLabel className="font-semibold text-slate-700">Email</FormLabel>
+                              <FormLabel className="text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">Email</FormLabel>
                               <FormControl>
-                                <Input {...field} className="h-11 border-slate-200 rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary font-medium bg-slate-50/50 text-slate-900" />
+                                <Input {...field} className="h-11 rounded-2xl border-border/70 bg-background/20 text-foreground" />
                               </FormControl>
                               <FormMessage />
                             </FormItem>
@@ -419,9 +421,9 @@ const CartPage = () => {
                           name="phone"
                           render={({ field }) => (
                             <FormItem>
-                              <FormLabel className="font-semibold text-slate-700">Phone</FormLabel>
+                              <FormLabel className="text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">Phone</FormLabel>
                               <FormControl>
-                                <Input {...field} className="h-11 border-slate-200 rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary font-medium bg-slate-50/50 text-slate-900" />
+                                <Input {...field} className="h-11 rounded-2xl border-border/70 bg-background/20 text-foreground" />
                               </FormControl>
                               <FormMessage />
                             </FormItem>
@@ -430,12 +432,12 @@ const CartPage = () => {
                       </div>
                     </div>
 
-                    <Separator className="bg-slate-100" />
+                    <Separator className="bg-border/60" />
 
                     {/* Address */}
                     <div>
-                      <h3 className='text-lg font-bold mb-6 flex items-center gap-3 text-slate-900'>
-                        <span className='bg-primary/10 text-primary w-8 h-8 flex items-center justify-center rounded-full text-sm font-bold'>2</span>
+                      <h3 className='text-lg font-semibold mb-6 flex items-center gap-3 text-foreground'>
+                        <span className='bg-primary/15 text-primary w-9 h-9 flex items-center justify-center rounded-2xl text-xs font-semibold tracking-[0.18em]'>02</span>
                         Shipping Address
                       </h3>
                       <div className='space-y-6'>
@@ -446,9 +448,9 @@ const CartPage = () => {
                               name="street"
                               render={({ field }) => (
                                 <FormItem>
-                                  <FormLabel className="font-semibold text-slate-700">Street Address</FormLabel>
+                                  <FormLabel className="text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">Street Address</FormLabel>
                                   <FormControl>
-                                    <Input {...field} className="h-11 border-slate-200 rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary font-medium bg-slate-50/50 text-slate-900" />
+                                    <Input {...field} className="h-11 rounded-2xl border-border/70 bg-background/20 text-foreground" />
                                   </FormControl>
                                   <FormMessage />
                                 </FormItem>
@@ -460,9 +462,9 @@ const CartPage = () => {
                             name="extNumber"
                             render={({ field }) => (
                               <FormItem>
-                                <FormLabel className="font-semibold text-slate-700">Ext. No.</FormLabel>
+                                <FormLabel className="text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">Ext. No.</FormLabel>
                                 <FormControl>
-                                  <Input {...field} className="h-11 border-slate-200 rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary font-medium bg-slate-50/50 text-slate-900" />
+                                  <Input {...field} className="h-11 rounded-2xl border-border/70 bg-background/20 text-foreground" />
                                 </FormControl>
                                 <FormMessage />
                               </FormItem>
@@ -475,9 +477,9 @@ const CartPage = () => {
                             name="codePostal"
                             render={({ field }) => (
                               <FormItem>
-                                <FormLabel className="font-semibold text-slate-700">Zip Code</FormLabel>
+                                <FormLabel className="text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">Zip Code</FormLabel>
                                 <FormControl>
-                                  <Input {...field} className="h-11 border-slate-200 rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary font-medium bg-slate-50/50 text-slate-900" />
+                                  <Input {...field} className="h-11 rounded-2xl border-border/70 bg-background/20 text-foreground" />
                                 </FormControl>
                                 <FormMessage />
                               </FormItem>
@@ -488,9 +490,9 @@ const CartPage = () => {
                             name="city"
                             render={({ field }) => (
                               <FormItem>
-                                <FormLabel className="font-semibold text-slate-700">City</FormLabel>
+                                <FormLabel className="text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">City</FormLabel>
                                 <FormControl>
-                                  <Input {...field} className="h-11 border-slate-200 rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary font-medium bg-slate-50/50 text-slate-900" />
+                                  <Input {...field} className="h-11 rounded-2xl border-border/70 bg-background/20 text-foreground" />
                                 </FormControl>
                                 <FormMessage />
                               </FormItem>
@@ -501,9 +503,9 @@ const CartPage = () => {
                             name="state"
                             render={({ field }) => (
                               <FormItem>
-                                <FormLabel className="font-semibold text-slate-700">State</FormLabel>
+                                <FormLabel className="text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">State</FormLabel>
                                 <FormControl>
-                                  <Input {...field} className="h-11 border-slate-200 rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary font-medium bg-slate-50/50 text-slate-900" />
+                                  <Input {...field} className="h-11 rounded-2xl border-border/70 bg-background/20 text-foreground" />
                                 </FormControl>
                                 <FormMessage />
                               </FormItem>
@@ -513,28 +515,28 @@ const CartPage = () => {
                       </div>
                     </div>
 
-                    <Separator className="bg-slate-100" />
+                    <Separator className="bg-border/60" />
 
                     {/* Payment */}
                     <div>
-                      <h3 className='text-lg font-bold mb-6 flex items-center gap-3 text-slate-900'>
-                        <span className='bg-primary/10 text-primary w-8 h-8 flex items-center justify-center rounded-full text-sm font-bold'>3</span>
+                      <h3 className='text-lg font-semibold mb-6 flex items-center gap-3 text-foreground'>
+                        <span className='bg-primary/15 text-primary w-9 h-9 flex items-center justify-center rounded-2xl text-xs font-semibold tracking-[0.18em]'>03</span>
                         Payment
                       </h3>
-                      <div className='bg-slate-50 p-6 rounded-xl border border-slate-200'>
+                      <div className='rounded-3xl border border-border/60 bg-secondary/20 p-6'>
                         <div className='grid gap-6'>
                            <FormField
                             control={form.control}
                             name="cardNumber"
                             render={({ field }) => (
                               <FormItem>
-                                <FormLabel className="font-semibold text-slate-700">Card Number</FormLabel>
+                                <FormLabel className="text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">Card Number</FormLabel>
                               <FormControl>
                                 <div className="relative">
                                   <Input 
                                     {...field} 
                                     placeholder="0000 0000 0000 0000" 
-                                    className="h-11 border-slate-200 rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary font-medium bg-white pl-12 text-slate-900" 
+                                    className="h-11 rounded-2xl border-border/70 bg-background/20 pl-12 text-foreground" 
                                     maxLength={19}
                                     onChange={(e) => {
                                       let value = e.target.value.replace(/\D/g, '');
@@ -544,7 +546,7 @@ const CartPage = () => {
                                     }}
                                   />
                                   <div className="absolute left-4 top-1/2 -translate-y-1/2 pointer-events-none z-10">
-                                    <CreditCard className="w-5 h-5 text-slate-400" />
+                                    <CreditCard className="w-5 h-5 text-muted-foreground" />
                                   </div>
                                 </div>
                               </FormControl>
@@ -557,9 +559,9 @@ const CartPage = () => {
                             name="cardName"
                             render={({ field }) => (
                               <FormItem>
-                                <FormLabel className="font-semibold text-slate-700">Name on Card</FormLabel>
+                                <FormLabel className="text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">Name on Card</FormLabel>
                                 <FormControl>
-                                  <Input {...field} placeholder="JOHN DOE" className="h-11 border-slate-200 rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary font-medium bg-white text-slate-900" />
+                                  <Input {...field} placeholder="JOHN DOE" className="h-11 rounded-2xl border-border/70 bg-background/20 text-foreground" />
                                 </FormControl>
                                 <FormMessage />
                               </FormItem>
@@ -571,9 +573,9 @@ const CartPage = () => {
                               name="cardDate"
                               render={({ field }) => (
                                 <FormItem>
-                                  <FormLabel className="font-semibold text-slate-700">Expiry (MMYY)</FormLabel>
+                                  <FormLabel className="text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">Expiry (MMYY)</FormLabel>
                                   <FormControl>
-                                    <Input {...field} placeholder="1225" maxLength={4} className="h-11 border-slate-200 rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary font-medium bg-white text-slate-900" />
+                                    <Input {...field} placeholder="1225" maxLength={4} className="h-11 rounded-2xl border-border/70 bg-background/20 text-foreground" />
                                   </FormControl>
                                   <FormMessage />
                                 </FormItem>
@@ -584,11 +586,11 @@ const CartPage = () => {
                               name="cardCvv"
                               render={({ field }) => (
                                 <FormItem>
-                                  <FormLabel className="font-semibold text-slate-700">CVV</FormLabel>
+                                  <FormLabel className="text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">CVV</FormLabel>
                                   <FormControl>
                                     <div className="relative">
-                                      <Input {...field} placeholder="123" maxLength={4} className="h-11 border-slate-200 rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary font-medium bg-white pl-12 text-slate-900" />
-                                      <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
+                                      <Input {...field} placeholder="123" maxLength={4} className="h-11 rounded-2xl border-border/70 bg-background/20 pl-12 text-foreground" />
+                                      <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
                                     </div>
                                   </FormControl>
                                   <FormMessage />
@@ -597,7 +599,7 @@ const CartPage = () => {
                             />
                           </div>
                         </div>
-                        <div className='mt-6 flex items-center gap-2 text-sm text-slate-500 font-medium'>
+                        <div className='mt-6 flex items-center gap-2 text-sm text-muted-foreground font-medium'>
                           <ShieldCheck className="w-4 h-4" />
                           <span>Payments are secure and encrypted</span>
                         </div>
@@ -607,7 +609,7 @@ const CartPage = () => {
                     <Button 
                       type="submit" 
                       disabled={isLoading}
-                      className="w-full h-14 rounded-lg bg-slate-900 text-white hover:bg-slate-800 font-bold text-lg shadow-sm"
+                      className="w-full h-14 rounded-2xl bg-primary text-primary-foreground hover:bg-primary/90 font-bold text-base shadow-[0_10px_35px_rgba(56,189,248,0.25)]"
                     >
                       {isLoading ? (
                         <span className="flex items-center gap-2">
@@ -630,26 +632,27 @@ const CartPage = () => {
               animate={{ opacity: 1, scale: 1 }}
               className='max-w-2xl mx-auto text-center'
             >
-              <div className='bg-white rounded-2xl p-12 shadow-sm border border-slate-100'>
-                <div className='w-20 h-20 bg-green-50 rounded-full flex items-center justify-center mx-auto mb-8'>
-                  <CheckCircle className='w-10 h-10 text-green-600' />
+              <div className='relative overflow-hidden rounded-3xl border border-border/60 bg-background/25 p-12 backdrop-blur-xl shadow-[0_40px_120px_rgba(0,0,0,0.55)]'>
+                <div className='absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(56,189,248,0.12),transparent_60%)]' />
+                <div className='relative w-20 h-20 bg-primary/15 rounded-2xl flex items-center justify-center mx-auto mb-8'>
+                  <CheckCircle className='w-10 h-10 text-primary' />
                 </div>
-                <h2 className='text-3xl font-bold mb-4 text-slate-900'>Payment Successful!</h2>
-                <p className='text-lg font-medium text-slate-600 mb-8'>
+                <h2 className='relative text-3xl font-semibold mb-4 text-foreground'>Payment Successful!</h2>
+                <p className='relative text-sm md:text-base font-medium text-muted-foreground mb-8'>
                   Your order has been placed. You will receive a confirmation email shortly.
                 </p>
 
                 {purchasedData.items.length > 0 && (
-                  <div className="mb-8 rounded-xl bg-slate-50 p-6 text-left border border-slate-200">
-                    <h3 className="text-lg font-bold mb-4 text-slate-900 border-b border-slate-200 pb-2">Order Summary</h3>
-                    <div className="space-y-3">
+                  <div className="relative mb-8 rounded-3xl bg-secondary/20 p-6 text-left border border-border/60">
+                    <h3 className="text-lg font-semibold mb-4 text-foreground border-b border-border/60 pb-2">Order Summary</h3>
+                    <div className="space-y-3 text-sm">
                       {purchasedData.items.map((item, index) => (
-                        <div key={index} className="flex justify-between items-center text-sm font-medium text-slate-700">
-                          <span>{item.name}</span>
-                          <span>${parseFloat(item.price).toFixed(2)}</span>
+                        <div key={index} className="flex justify-between items-center font-medium text-muted-foreground">
+                          <span className="pr-4">{item.name}</span>
+                          <span className="text-foreground">${parseFloat(item.price).toFixed(2)}</span>
                         </div>
                       ))}
-                      <div className="border-t border-slate-200 pt-4 mt-4 flex justify-between items-center text-base font-bold text-slate-900">
+                      <div className="border-t border-border/60 pt-4 mt-4 flex justify-between items-center text-base font-semibold text-foreground">
                         <span>Total Paid</span>
                         <span className="text-primary">${purchasedData.total.toFixed(2)}</span>
                       </div>
@@ -659,7 +662,7 @@ const CartPage = () => {
 
                 <Button 
                   onClick={() => router.push('/')}
-                  className="h-12 px-10 rounded-lg bg-slate-900 text-white hover:bg-slate-800 font-semibold tracking-wide shadow-sm"
+                  className="relative h-12 px-10 rounded-2xl bg-primary text-primary-foreground hover:bg-primary/90 font-semibold shadow-[0_10px_35px_rgba(56,189,248,0.25)]"
                 >
                   Return Home
                 </Button>

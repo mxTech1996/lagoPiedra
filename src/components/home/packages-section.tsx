@@ -41,71 +41,96 @@ export function PackagesSection() {
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, delay: index * 0.1, ease: "easeOut" }}
         viewport={{ once: true }}
-        className="group relative flex flex-col bg-white rounded-xl border border-slate-200 shadow-sm hover:shadow-md transition-all duration-300 overflow-hidden"
+        className="group relative overflow-hidden rounded-3xl border border-border/60 bg-background/25 backdrop-blur-xl transition-all hover:bg-background/35"
       >
-        <div className="relative aspect-[4/3] bg-slate-100 overflow-hidden">
-           {product.image && (
-             <Image
+        <div className="absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100 bg-[radial-gradient(circle_at_top,rgba(56,189,248,0.14),transparent_60%)]" />
+
+        <div className="relative">
+          <div className="relative aspect-[4/3] overflow-hidden">
+            {product.image && (
+              <Image
                 src={product.image}
                 alt={product.name}
                 fill
                 className="object-cover transition-transform duration-700 group-hover:scale-105"
-             />
-           )}
-        </div>
-        
-        <div className="p-6 flex flex-col flex-grow">
-           <div className="flex justify-between items-start mb-4 gap-4">
-             <h3 className="font-semibold text-lg text-slate-900">{product.name}</h3>
-             <span className="font-bold text-slate-900 bg-slate-100 px-2 py-1 rounded text-sm">${product.price}</span>
-           </div>
-           <p className="text-slate-600 text-sm leading-relaxed mb-6 flex-grow">{product.description}</p>
-           
-           <Button 
-             onClick={handleAction}
-             variant={isInCart ? "secondary" : "default"}
-             className="w-full gap-2"
-           >
-             {isProducts ? (isInCart ? <><Check className="w-4 h-4" /> Selected</> : "Select Experience") : "Request Info"}
-             {!isInCart && <ArrowRight className="w-4 h-4" />}
-           </Button>
+              />
+            )}
+            <div className="absolute inset-0 bg-gradient-to-t from-background via-background/25 to-transparent" />
+
+            <div className="absolute left-5 top-5 flex items-center gap-2 rounded-full border border-border/60 bg-background/25 px-3 py-1.5 text-xs font-semibold tracking-[0.18em] uppercase text-white backdrop-blur">
+              ${product.price} USD
+            </div>
+
+            {isInCart && (
+              <div className="absolute right-5 top-5 inline-flex items-center gap-2 rounded-full bg-primary/20 px-3 py-1.5 text-xs font-semibold tracking-[0.18em] uppercase text-primary backdrop-blur">
+                <Check className="h-4 w-4" />
+                Selected
+              </div>
+            )}
+          </div>
+
+          <div className="p-6 md:p-7 flex flex-col">
+            <h3 className="text-lg md:text-xl font-semibold tracking-tight text-foreground">
+              {product.name}
+            </h3>
+            <p className="mt-3 text-sm leading-relaxed text-muted-foreground flex-grow">
+              {product.description}
+            </p>
+
+            <div className="mt-6">
+              <Button
+                onClick={handleAction}
+                variant={isInCart ? "secondary" : "default"}
+                className="w-full h-12 rounded-2xl gap-2 font-semibold"
+              >
+                {isProducts ? (isInCart ? <>Selected</> : "Select Experience") : "Request Info"}
+                {!isInCart && <ArrowRight className="w-4 h-4" />}
+              </Button>
+            </div>
+          </div>
         </div>
       </motion.div>
     );
   };
 
   return (
-    <section className="py-24 bg-white">
-      <div className="container mx-auto px-4 md:px-6">
+    <section className="relative w-full py-24 md:py-32">
+      <div className="container mx-auto px-6">
         
-        <div className="flex flex-col items-center text-center mb-16 space-y-4">
-           <div className="inline-flex items-center rounded-full border border-slate-200 bg-slate-50 px-3 py-1 text-sm text-slate-900 shadow-sm">
-             Experience Catalog
-           </div>
-           <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-slate-900">
-             Curated Aerial Experiences
-           </h2>
-           <p className="text-lg text-slate-600 max-w-2xl">
-             Explore flight tours, event flyovers, and production support designed for tourism destinations.
-           </p>
+        <div className="mx-auto max-w-3xl text-center space-y-5 mb-12 md:mb-16">
+          <div className="inline-flex items-center gap-3 rounded-full border border-border/60 bg-background/25 px-4 py-2 backdrop-blur-xl">
+            <span className="h-2 w-2 rounded-full bg-primary" />
+            <span className="text-xs font-semibold tracking-[0.18em] uppercase text-muted-foreground">
+              Experiences
+            </span>
+          </div>
+          <h2 className="text-3xl md:text-4xl font-semibold tracking-tight text-foreground">
+            Curated Aerial Experiences
+          </h2>
+          <p className="text-sm md:text-base leading-relaxed text-muted-foreground">
+            Choose a flight experience or event package, then add operational support when needed.
+          </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-20">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 mb-14 md:mb-20">
           {mainProducts.map((product, index) => renderProductCard(product, index))}
         </div>
 
         {additionalProducts.length > 0 && (
           <>
-            <div className="flex flex-col items-center text-center mb-12 space-y-4">
-               <div className="inline-flex items-center rounded-full border border-slate-200 bg-slate-50 px-3 py-1 text-sm text-slate-900 shadow-sm">
-                 Add-Ons
-               </div>
-               <h2 className="text-3xl font-bold tracking-tight text-slate-900">
-                 Operational Support
-               </h2>
+            <div className="mx-auto max-w-3xl text-center space-y-5 mb-10">
+              <div className="inline-flex items-center gap-3 rounded-full border border-border/60 bg-background/25 px-4 py-2 backdrop-blur-xl">
+                <span className="h-2 w-2 rounded-full bg-accent" />
+                <span className="text-xs font-semibold tracking-[0.18em] uppercase text-muted-foreground">
+                  Add-ons
+                </span>
+              </div>
+              <h2 className="text-2xl md:text-3xl font-semibold tracking-tight text-foreground">
+                Operational Support
+              </h2>
             </div>
             
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
               {additionalProducts.map((product, index) => renderProductCard(product, index))}
             </div>
           </>

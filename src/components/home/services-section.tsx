@@ -40,57 +40,68 @@ const services = [
 
 export function ServicesSection() {
   return (
-    <section id='services' className='py-24 bg-slate-50'>
-      <div className='container mx-auto px-4 md:px-6'>
-        <div className='flex flex-col md:flex-row justify-between items-start md:items-end mb-16 gap-6'>
-          <div className='max-w-2xl'>
-            <div className="inline-flex items-center rounded-full border border-slate-200 bg-white px-3 py-1 text-sm text-slate-900 shadow-sm mb-6">
-              <span className="flex h-2 w-2 rounded-full bg-primary mr-2 animate-pulse"></span>
-              What We Do
+    <section id='services' className='relative w-full py-24 md:py-32'>
+      <div className='container mx-auto px-6'>
+        <div className='grid grid-cols-1 gap-10 lg:grid-cols-12 lg:gap-12'>
+          <div className='lg:col-span-4 lg:sticky lg:top-28 space-y-6'>
+            <div className='inline-flex items-center gap-3 rounded-full border border-border/60 bg-background/25 px-4 py-2 backdrop-blur-xl'>
+              <span className='h-2 w-2 rounded-full bg-primary' />
+              <span className='text-xs font-semibold tracking-[0.18em] uppercase text-muted-foreground'>
+                Capabilities
+              </span>
             </div>
-            <h2 className='text-3xl md:text-4xl font-bold tracking-tight text-slate-900 mb-4'>
-              Aviation Services for Tourism Destinations
+
+            <h2 className='text-3xl md:text-4xl font-semibold tracking-tight text-foreground'>
+              Aviation services built for destinations.
             </h2>
-            <p className='text-lg text-slate-600 leading-relaxed'>
-              From scenic flights to aerial shows, we deliver safe, coordinated operations built around guest experience and event-day precision.
+
+            <p className='text-sm md:text-base leading-relaxed text-muted-foreground'>
+              We blend guest experience with operational discipline—routes, shows, and support designed to run cleanly under pressure.
             </p>
+
+            <Link href='/services'>
+              <Button className='h-12 rounded-2xl bg-primary text-primary-foreground hover:bg-primary/90 px-6 font-semibold shadow-[0_10px_35px_rgba(56,189,248,0.25)]'>
+                View All Services <ArrowRight className='ml-2 h-4 w-4' />
+              </Button>
+            </Link>
           </div>
-          <Link href="/services">
-            <Button variant="outline" className="hidden md:flex gap-2">
-              View All Services <ArrowRight className="w-4 h-4" />
-            </Button>
-          </Link>
-        </div>
 
-        <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8'>
-          {services.map((service, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: index * 0.1, ease: "easeOut" }}
-              viewport={{ once: true }}
-              className='group bg-white p-8 rounded-xl border border-slate-200 shadow-sm hover:shadow-md transition-all duration-300'
-            >
-              <div className="w-12 h-12 bg-slate-100 rounded-lg flex items-center justify-center text-slate-900 mb-6 group-hover:bg-primary group-hover:text-white transition-colors duration-300">
-                {service.icon}
-              </div>
-              <h3 className='text-xl font-semibold text-slate-900 mb-3 group-hover:text-primary transition-colors'>
-                {service.title}
-              </h3>
-              <p className='text-slate-600 leading-relaxed'>
-                {service.description}
-              </p>
-            </motion.div>
-          ))}
-        </div>
+          <div className='lg:col-span-8'>
+            <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
+              {services.map((service, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 16 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: index * 0.06, ease: 'easeOut' }}
+                  viewport={{ once: true }}
+                  className='group relative overflow-hidden rounded-3xl border border-border/60 bg-background/25 p-6 md:p-8 backdrop-blur-xl transition-all hover:bg-background/35'
+                >
+                  <div className='absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100 bg-[radial-gradient(circle_at_top,rgba(56,189,248,0.14),transparent_60%)]' />
 
-        <div className="mt-12 md:hidden">
-          <Link href="/services">
-            <Button variant="outline" className="w-full gap-2">
-              View All Services <ArrowRight className="w-4 h-4" />
-            </Button>
-          </Link>
+                  <div className='relative flex items-start justify-between gap-6'>
+                    <div className='space-y-3'>
+                      <p className='text-xs font-semibold tracking-[0.18em] uppercase text-muted-foreground'>
+                        Module {String(index + 1).padStart(2, '0')}
+                      </p>
+                      <h3 className='text-xl font-semibold tracking-tight text-foreground'>
+                        {service.title}
+                      </h3>
+                    </div>
+                    <div className='shrink-0'>
+                      <div className='h-12 w-12 rounded-2xl border border-border/60 bg-secondary/30 flex items-center justify-center text-primary'>
+                        {service.icon}
+                      </div>
+                    </div>
+                  </div>
+
+                  <p className='relative mt-4 text-sm leading-relaxed text-muted-foreground'>
+                    {service.description}
+                  </p>
+                </motion.div>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
     </section>

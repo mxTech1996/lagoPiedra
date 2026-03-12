@@ -33,52 +33,69 @@ const processSteps = [
 
 export function OurProcessSection() {
   return (
-    <section className='py-24 bg-slate-50'>
-      <div className='container mx-auto px-4 md:px-6'>
-        
-        <div className='mb-24 text-center max-w-3xl mx-auto space-y-4'>
-           <div className="inline-flex items-center rounded-full border border-slate-200 bg-white px-3 py-1 text-sm text-slate-900 shadow-sm">
-             How We Work
-           </div>
-           
-           <h2 className='text-3xl md:text-4xl font-bold tracking-tight text-slate-900'>
-             Delivering Every Flight with Clarity
-           </h2>
-           
-           <p className='text-lg text-slate-600 leading-relaxed'>
-             A simple process that keeps safety, timing, and guest experience aligned from planning to execution.
-           </p>
+    <section className='relative w-full py-24 md:py-32'>
+      <div className='container mx-auto px-6'>
+        <div className='mx-auto max-w-3xl text-center space-y-5'>
+          <div className='inline-flex items-center gap-3 rounded-full border border-border/60 bg-background/25 px-4 py-2 backdrop-blur-xl'>
+            <span className='h-2 w-2 rounded-full bg-primary' />
+            <span className='text-xs font-semibold tracking-[0.18em] uppercase text-muted-foreground'>
+              Flight Path
+            </span>
+          </div>
+          <h2 className='text-3xl md:text-4xl font-semibold tracking-tight text-foreground'>
+            A process designed to stay calm under pressure.
+          </h2>
+          <p className='text-sm md:text-base leading-relaxed text-muted-foreground'>
+            We keep safety, timing, and guest experience aligned—before, during, and after the activation.
+          </p>
         </div>
 
-        <div className='relative'>
-          {/* Connecting Line (Desktop) */}
-          <div className='absolute top-12 left-0 w-full h-px bg-slate-200 hidden lg:block' />
+        <div className='mt-12 relative'>
+          <div className='absolute left-5 top-0 bottom-0 w-px bg-gradient-to-b from-primary/45 via-border/60 to-transparent md:left-1/2 md:-translate-x-1/2' />
 
-          <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12 lg:gap-8'>
+          <div className='grid gap-6 md:gap-8'>
             {processSteps.map((step, index) => (
               <motion.div
                 key={step.number}
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 16 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ delay: index * 0.1, duration: 0.5, ease: "easeOut" }}
-                className='relative group'
+                transition={{ delay: index * 0.06, duration: 0.5, ease: 'easeOut' }}
+                className='relative'
               >
-                {/* Step Circle */}
-                <div className='w-24 h-24 bg-white rounded-full border border-slate-200 flex items-center justify-center mb-8 mx-auto relative z-10 shadow-sm group-hover:border-primary group-hover:shadow-md transition-all duration-300'>
-                   <span className='text-xl font-bold font-mono text-slate-400 group-hover:text-primary transition-colors'>
-                     {step.number}
-                   </span>
-                </div>
+                {(() => {
+                  const isLeft = index % 2 === 0;
+                  return (
+                <div className='flex items-start gap-4 md:gap-8 md:items-stretch md:justify-between'>
+                  <div className='relative z-10 mt-2 h-10 w-10 shrink-0 rounded-2xl border border-border/70 bg-secondary/30 text-primary flex items-center justify-center text-xs font-semibold md:order-2 md:mx-auto'>
+                    {step.number}
+                  </div>
 
-                <div className='text-center space-y-3 px-4'>
-                  <h3 className='text-lg font-semibold text-slate-900'>
-                    {step.title}
-                  </h3>
-                  <p className='text-sm text-slate-600 leading-relaxed'>
-                    {step.description}
-                  </p>
+                  <div
+                    className={[
+                      'w-full md:w-[calc(50%-2.5rem)]',
+                      isLeft ? 'md:order-1 md:text-right' : 'md:order-3',
+                    ].join(' ')}
+                  >
+                    <div className='rounded-3xl border border-border/60 bg-background/25 p-6 backdrop-blur-xl'>
+                      <p className='text-xs font-semibold tracking-[0.18em] uppercase text-muted-foreground'>
+                        {step.title}
+                      </p>
+                      <p className='mt-3 text-sm leading-relaxed text-muted-foreground'>
+                        {step.description}
+                      </p>
+                    </div>
+                  </div>
+
+                  <div
+                    className={[
+                      'hidden md:block md:w-[calc(50%-2.5rem)]',
+                      isLeft ? 'md:order-3' : 'md:order-1',
+                    ].join(' ')}
+                  />
                 </div>
+                  );
+                })()}
               </motion.div>
             ))}
           </div>
