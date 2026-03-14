@@ -13,11 +13,11 @@ export const dataSite = {
     "https://firebasestorage.googleapis.com/v0/b/studio-7228882240-381f4.firebasestorage.app/o/users%2Fw4oe6wkce3accA6Pre774sAN8Ah1%2Fsitios%2Fnew_1773275075994%2FheroImage1_pexels-pixabay-51359.jpg?alt=media&token=6b538227-cc16-4235-a9f9-bb3a3a6fd1ef",
     "https://firebasestorage.googleapis.com/v0/b/studio-7228882240-381f4.firebasestorage.app/o/users%2Fw4oe6wkce3accA6Pre774sAN8Ah1%2Fsitios%2Fnew_1773275083417%2FheroImage2_pexels-erikscheel-122829.jpg?alt=media&token=b526b103-a535-45d9-bcc4-da242dbadf56",
   ],
-  telephone: "5521784833",
+  telephone: "5535503505",
+  email: "comercio@lagoaviacion.com",
   subtitle:
     "We take excitement to the skies with aerial exhibitions and spectacular productions",
   name: "Lago",
-  email: "admeveret@emailsecure.lat",
   logo: "https://firebasestorage.googleapis.com/v0/b/studio-7228882240-381f4.firebasestorage.app/o/users%2Fw4oe6wkce3accA6Pre774sAN8Ah1%2Fsitios%2Fnew_1773274748871%2Flogo_high-resolution-logo-grayscale.png?alt=media&token=262d0ce4-5f77-48b2-ab03-974c3e49498c",
   description:
     "Our company specializes in providing professional aviation and entertainment services designed to create unforgettable experiences. We organize and produce aerial shows, aviation demonstrations, and large-scale spectacles that combine innovation, safety, and creativity. Through strategic planning, advanced technology, and a team of highly trained professionals, we deliver dynamic performances for festivals, corporate events, public celebrations, and private productions.",
